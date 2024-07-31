@@ -29,16 +29,16 @@ public class ModItems {
 
     //kititems
     public static final RegistryObject<Item> SPLINT = ITEMS.register("splint",
-            () -> new KitItem(new Item.Properties()));
+            () -> new KitItem(new Item.Properties(), 1));
 
     public static final RegistryObject<Item> PAINKILLERS = ITEMS.register("painkillers",
-            () -> new KitItem(new Item.Properties()));
+            () -> new KitItem(new Item.Properties(), 6));
 
     public static final RegistryObject<Item> ANTIBIOTIC = ITEMS.register("antibiotic",
-            () -> new KitItem(new Item.Properties()));
+            () -> new KitItem(new Item.Properties(), 5));
 
     public static final RegistryObject<Item> MEDKIT = ITEMS.register("medkit",
-            () -> new KitItem(new Item.Properties()));
+            () -> new KitItem(new Item.Properties(), 3));
 
 
 

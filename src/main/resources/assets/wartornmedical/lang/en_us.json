@@ -9,6 +9,8 @@
   "item.wartornmedical.tourniquet": "Tourniquet",
   "item.wartornmedical.painkillers": "Painkillers",
   "item.wartornmedical.antibiotic": "Antibiotic",
-  "item.wartornmedical.medkit": "Medkit"
+  "item.wartornmedical.medkit": "Medkit",
+
+  "item.wartornmedical.durability": "Durability: %d"
 
 }
