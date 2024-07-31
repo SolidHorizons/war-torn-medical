@@ -4,12 +4,12 @@
 
   "item.wartornmedical.gauze": "Gauze",
   "item.wartornmedical.bandage": "Bandage",
-  "item.wartornmedical.di_bandage": "Desinfected Bandage",
+  "item.wartornmedical.di_bandage": "Disinfectant Bandage",
   "item.wartornmedical.splint": "Splint",
   "item.wartornmedical.tourniquet": "Tourniquet",
   "item.wartornmedical.painkillers": "Painkillers",
   "item.wartornmedical.antibiotic": "Antibiotic",
-  "item.wartornmedical.medkit": "Medkit",
+  "item.wartornmedical.medkit": "Med kit",
 
   "item.wartornmedical.durability": "Durability: %d"
 
