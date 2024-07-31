@@ -16,7 +16,7 @@ public class ModCreativeModeTabs {
 
 
     public static final RegistryObject<CreativeModeTab> WARTORN_TAB = CREATIVE_MODE_TABS.register("wartorn_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.GAUZE.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.PAINKILLERS.get()))
                     .title(Component.translatable("creativetab.wartorn-medical_tab"))
                     .displayItems((pParameters, pOutput) -> {
 

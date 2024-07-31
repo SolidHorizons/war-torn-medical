@@ -11,6 +11,8 @@
   "item.wartornmedical.antibiotic": "Antibiotic",
   "item.wartornmedical.medkit": "Med kit",
 
-  "item.wartornmedical.durability": "Durability: %d"
+  "item.wartornmedical.durability": "Durability: %d",
+
+  "effect.wartornmedical.broken_leg": "Broken femur"
 
 }
