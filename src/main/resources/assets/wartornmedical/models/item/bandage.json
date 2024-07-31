@@ -1,6 +1,51 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "wartornmedical:item/bandage"
-  }
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "wartornmedical:item/war-torn_bandage",
+		"particle": "wartornmedical:item/war-torn_bandage"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 2],
+			"to": [14, 16, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 0, 2]},
+			"faces": {
+				"north": {"uv": [0, 0, 3, 4.5], "texture": "#0"},
+				"east": {"uv": [3, 0, 6, 4.5], "texture": "#0"},
+				"south": {"uv": [0, 4.5, 3, 9], "texture": "#0"},
+				"west": {"uv": [3, 4.5, 6, 9], "texture": "#0"},
+				"up": {"uv": [9, 3, 6, 0], "texture": "#0"},
+				"down": {"uv": [9, 3, 6, 6], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"thirdperson_lefthand": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_righthand": {
+			"rotation": [-12, -19, 0],
+			"translation": [-0.25, 2.5, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-19, -12, 0],
+			"translation": [-1, 1.25, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"gui": {
+			"rotation": [17, -26, 0],
+			"scale": [0.7, 0.7, 0.7]
+		},
+		"head": {
+			"scale": [1.2, 1.2, 1.2]
+		}
+	}
 }
