@@ -29,7 +29,7 @@ public class ModItems {
 
     //kititems
     public static final RegistryObject<Item> SPLINT = ITEMS.register("splint",
-            () -> new KitItem(new Item.Properties(), 1));
+            () -> new KitItem(new Item.Properties(), 2));
 
     public static final RegistryObject<Item> PAINKILLERS = ITEMS.register("painkillers",
             () -> new KitItem(new Item.Properties(), 6));

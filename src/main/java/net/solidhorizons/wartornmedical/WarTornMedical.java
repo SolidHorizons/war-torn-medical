@@ -2,6 +2,7 @@ package net.solidhorizons.wartornmedical;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
@@ -24,6 +25,8 @@ import net.solidhorizons.wartornmedical.item.ModCreativeModeTabs;
 import net.solidhorizons.wartornmedical.item.ModItems;
 import net.solidhorizons.wartornmedical.effect.BrokenLegEffect;
 import org.slf4j.Logger;
+
+import java.util.Random;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(WarTornMedical.MOD_ID)
@@ -54,12 +57,25 @@ public class WarTornMedical
     boolean fellFarEnough = false;
     boolean gotHurt = false;
     int ticksPassed = 0;
+    int ticksForDamage = 0;
+    int randint = 0;
 
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
 
         Player player = event.player;
         groundCheckLeg(player);
+
+        if(player.hasEffect(ModEffects.BROKEN_LEG_EFFECT.get())){
+            if (ticksForDamage < 20){
+                ticksForDamage ++;
+            }else{
+                Random rand = new Random();
+                randint = rand.nextInt(1, 20);
+                ticksForDamage = 0;
+            }
+            travelDistanceDamageTick(player);
+        }
 
         if (ticksPassed >= 10){
             fellFarEnough = false;
@@ -87,6 +103,20 @@ public class WarTornMedical
             player.addEffect(new MobEffectInstance(ModEffects.BROKEN_LEG_EFFECT.get(), 6000));
             fellFarEnough = false;
             gotHurt = false;
+        }
+    }
+
+    boolean hasDamaged = true;
+    public void travelDistanceDamageTick(Player player){
+        double walked = player.walkDist;
+
+        if((int)walked % 3 == 0){ //checks every 3 blocks for a random damage chance
+            if(randint == 1){
+                player.hurt(player.damageSources().fall(), 1);
+                hasDamaged = true;
+            }else{
+                hasDamaged = false;
+            }
         }
     }
 
