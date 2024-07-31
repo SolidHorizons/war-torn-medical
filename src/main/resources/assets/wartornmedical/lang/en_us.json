@@ -1,6 +1,6 @@
 {
 
-  "creativetab.wartorn-medical_tab": "War-torn medical",
+  "creativetab.wartorn-medical_tab": "Wartorn medical",
 
   "item.wartornmedical.gauze": "Gauze",
   "item.wartornmedical.bandage": "Bandage",
@@ -11,10 +11,19 @@
   "item.wartornmedical.antibiotic": "Antibiotic",
   "item.wartornmedical.medkit": "Med kit",
 
-  "tooltip.wartornmedical.default.tooltip": "a wartorn medical item",
   "item.wartornmedical.durability": "Durability: %d",
 
 
-  "effect.wartornmedical.broken_leg": "Broken femur"
+  "tooltip.wartornmedical.default.tooltip": "A wartorn medical item",
+
+
+  "effect.wartornmedical.broken_leg": "Broken femur",
+  "effect.wartornmedical.broken_arm": "Broken arm",
+  "effect.wartornmedical.infection_s1": "Infection stage 1",
+  "effect.wartornmedical.infection_s2": "Infection stage 2",
+  "effect.wartornmedical.infection_s3": "Infection stage 3",
+  "effect.wartornmedical.light_bleeding": "Light bleeding",
+  "effect.wartornmedical.heavy_bleeding": "Heavy bleeding",
+  "effect.wartornmedical.addiction": "Addicted"
 
 }

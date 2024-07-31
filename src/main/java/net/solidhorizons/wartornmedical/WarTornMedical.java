@@ -53,6 +53,7 @@ public class WarTornMedical
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
 
         Player player = event.player;
+        // ------ brokenleg tick logic start ------
         groundCheckLeg(player);
 
         if(player.hasEffect(ModEffects.BROKEN_LEG_EFFECT.get())){
@@ -72,10 +73,12 @@ public class WarTornMedical
         }
 
         if (fellFarEnough){ ticksPassed ++; }
-
         if (player.fallDistance >= FALL_HEIGHT_THRESHOLD) { fellFarEnough = true; }
-
         if(player.isHurt()){ gotHurt = true; }
+        // ------ brokenleg tick logic end ------
+        // ------ brokenarm tick logic start ------
+
+        // ------ brokenleg tick logic end ------
 
     }
     //------------------Broken leg logic start-------------------
