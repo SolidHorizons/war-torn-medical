@@ -11,7 +11,9 @@
   "item.wartornmedical.antibiotic": "Antibiotic",
   "item.wartornmedical.medkit": "Med kit",
 
+  "tooltip.wartornmedical.default.tooltip": "a wartorn medical item",
   "item.wartornmedical.durability": "Durability: %d",
+
 
   "effect.wartornmedical.broken_leg": "Broken femur"
 

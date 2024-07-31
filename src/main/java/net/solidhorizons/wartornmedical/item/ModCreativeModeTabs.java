@@ -23,8 +23,8 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.GAUZE.get());
                         pOutput.accept(ModItems.BANDAGE.get());
                         pOutput.accept(ModItems.DI_BANDAGE.get());
-                        pOutput.accept(ModItems.SPLINT.get());
                         pOutput.accept(ModItems.TOURNIQUET.get());
+                        pOutput.accept(ModItems.SPLINT.get());
                         pOutput.accept(ModItems.PAINKILLERS.get());
                         pOutput.accept(ModItems.ANTIBIOTIC.get());
                         pOutput.accept(ModItems.MEDKIT.get());

@@ -4,11 +4,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.solidhorizons.wartornmedical.WarTornMedical;
+
 
 public class BrokenLegEffect extends MobEffect {
     public BrokenLegEffect(MobEffectCategory category, int color) {
@@ -25,6 +21,6 @@ public class BrokenLegEffect extends MobEffect {
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true; // Applies effect every tick while active
+        return true;
     }
 }
