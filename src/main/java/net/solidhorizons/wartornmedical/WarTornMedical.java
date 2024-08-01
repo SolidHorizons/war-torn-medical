@@ -106,6 +106,11 @@ public class WarTornMedical
     }
 
     //------------------Broken leg logic end-------------------
+    //------------------Broken arm logic start-----------------
+
+
+
+    //------------------Broken arm logic end-------------------
 
 
     @SubscribeEvent
