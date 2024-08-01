@@ -15,7 +15,7 @@ public class BrokenLegEffect extends MobEffect {
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
             // Reduce player speed by 50%
-            player.setDeltaMovement(player.getDeltaMovement().multiply(0.5, 1, 0.5));
+            player.setDeltaMovement(player.getDeltaMovement().multiply(0.36, 1, 0.36));
         }
     }
 
