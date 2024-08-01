@@ -26,22 +26,22 @@ public class ModEffects {
             () -> new BrokenArmEffect(MobEffectCategory.HARMFUL, 0x00000000));
 
     public static final RegistryObject<MobEffect> LIGHT_BLEEDING_EFFECT = MOB_EFFECTS.register("light_bleeding",
-            () -> new BrokenArmEffect(MobEffectCategory.HARMFUL, 0x00000000));
+            () -> new LightBleedingEffect(MobEffectCategory.HARMFUL, 0x00000000));
 
     public static final RegistryObject<MobEffect> HEAVY_BLEEDING_EFFECT = MOB_EFFECTS.register("heavy_bleeding",
-            () -> new BrokenArmEffect(MobEffectCategory.HARMFUL, 0x00000000));
+            () -> new HeavyBleedingEffect(MobEffectCategory.HARMFUL, 0x00000000));
 
     public static final RegistryObject<MobEffect> INFECTION_S1 = MOB_EFFECTS.register("infection_s1",
-            () -> new BrokenArmEffect(MobEffectCategory.HARMFUL, 0x00000000));
+            () -> new InfectionStageOneEffect(MobEffectCategory.HARMFUL, 0x00000000));
 
     public static final RegistryObject<MobEffect> INFECTION_S2 = MOB_EFFECTS.register("infection_s2",
-            () -> new BrokenArmEffect(MobEffectCategory.HARMFUL, 0x00000000));
+            () -> new InfectionStageTwoEffect(MobEffectCategory.HARMFUL, 0x00000000));
 
     public static final RegistryObject<MobEffect> INFECTION_S3 = MOB_EFFECTS.register("infection_s3",
-            () -> new BrokenArmEffect(MobEffectCategory.HARMFUL, 0x00000000));
+            () -> new InfectionStageThreeEffect(MobEffectCategory.HARMFUL, 0x00000000));
 
     public static final RegistryObject<MobEffect> ADDICTION = MOB_EFFECTS.register("addiction",
-            () -> new BrokenArmEffect(MobEffectCategory.HARMFUL, 0x00000000));
+            () -> new AddictionEffect(MobEffectCategory.HARMFUL, 0x00000000));
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);
