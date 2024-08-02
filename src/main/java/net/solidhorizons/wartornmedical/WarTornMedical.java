@@ -3,10 +3,13 @@ package net.solidhorizons.wartornmedical;
 import com.mojang.logging.LogUtils;
 import net.minecraft.advancements.critereon.EntityHurtPlayerTrigger;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -17,6 +20,7 @@ import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.level.NoteBlockEvent;
@@ -58,14 +62,17 @@ public class WarTornMedical
     //variables for logic below
     boolean fellFarEnough = false;
     boolean gotHurt = false;
-    boolean hasDamaged = true;
+    boolean brokenLegChanceHappened = true;
+    boolean hasLBleeding = false;
+    boolean hasHBleeding = false;
+    boolean hasBrokenArm = false;
+    final int damageTickPerBlocksWalked = 7;
     int ticksPassed = 0;
     int ticksForDamage = 0;
-    int randint = 0;
-    private int lBleedingTimer = 0; // For light bleeding effect
-    private int hBleedingTimer = 0; // For heavy bleeding effect
-    private static final int LIGHT_BLEEDING_DELAY = 900; // Delay for light bleeding (in ticks, 20 ticks = 1 second)
-    private static final int HEAVY_BLEEDING_DELAY = 360; // Delay for heavy bleeding (every 0.5 seconds)
+    private int lBleedingTimer = 0;
+    private int hBleedingTimer = 0;
+    final int LIGHT_BLEEDING_DELAY = 900;
+    final int HEAVY_BLEEDING_DELAY = 900;
 
     //used every tick
     @SubscribeEvent
@@ -74,21 +81,24 @@ public class WarTornMedical
         Player player = event.player;
         groundCheckLeg(player);
 
+        hasLBleeding = player.hasEffect(ModEffects.LIGHT_BLEEDING_EFFECT.get());
+        hasHBleeding = player.hasEffect(ModEffects.HEAVY_BLEEDING_EFFECT.get());
+
         if(player.hasEffect(ModEffects.BROKEN_LEG_EFFECT.get())){
             if (ticksForDamage < 20){
                 ticksForDamage ++;
             }else{
-                randint = rand.nextInt(1, 20);
                 ticksForDamage = 0;
             }
             travelDistanceDamageTick(player);
         }
 
-        if (player.hasEffect(ModEffects.LIGHT_BLEEDING_EFFECT.get())) {
+        if (hasLBleeding) {
             lBleedingTimer++;
             if (lBleedingTimer >= LIGHT_BLEEDING_DELAY) {
 
-                player.hurt(player.damageSources().generic(), 2.0F);
+                player.hurtMarked = true;
+                player.hurt(player.damageSources().magic(), 1);
                 LOGGER.info("" + lBleedingTimer);
                 lBleedingTimer = 0;
                 LOGGER.info("lbleed tick");
@@ -97,11 +107,12 @@ public class WarTornMedical
             lBleedingTimer = 0;
         }
 
-        if (player.hasEffect(ModEffects.HEAVY_BLEEDING_EFFECT.get())) {
+        if (hasHBleeding) {
             hBleedingTimer++;
             if (hBleedingTimer >= HEAVY_BLEEDING_DELAY) {
 
-                player.hurt(player.damageSources().generic(), 2.0F);
+                player.hurtMarked = true;
+                player.hurt(player.damageSources().magic(), 2);
                 LOGGER.info("" + hBleedingTimer);
                 hBleedingTimer = 0;
                 LOGGER.info("hbleed tick");
@@ -136,14 +147,15 @@ public class WarTornMedical
 
     public void travelDistanceDamageTick(Player player){
         double walked = player.walkDist;
+        int chanceAtLegDamage = rand.nextInt(1,20);
 
-        if((int)walked % 3 == 0){ //checks every 3 blocks for a random damage chance
-            if(randint == 1){
+        if((int)walked % damageTickPerBlocksWalked == 0 && !brokenLegChanceHappened){ //checks every so many blocks for a random damage chance
+            if(chanceAtLegDamage == 1) {
                 player.hurt(player.damageSources().fall(), 1);
-                hasDamaged = true;
-            }else{
-                hasDamaged = false;
             }
+            brokenLegChanceHappened = true;
+        }else{
+            brokenLegChanceHappened = false;
         }
     }
 
@@ -164,6 +176,39 @@ public class WarTornMedical
 
     //------------------Broken arm logic end-------------------
 
+    //------------------Bleeding logic start-------------------
+    @SubscribeEvent
+    public void onPlayerHit(LivingAttackEvent event) {
+        int effectChance = rand.nextInt(1, 101);
+        if(effectChance <= 12){
+
+            if (event.getEntity() instanceof Player player &&
+                    (event.getSource().getEntity() instanceof Entity ||
+                    event.getSource().getEntity() instanceof LivingEntity) ) {
+
+                player.addEffect(new MobEffectInstance(ModEffects.LIGHT_BLEEDING_EFFECT.get(),
+                        2000, 0, false, false,true));
+                hasLBleeding = true;
+            }
+
+        } else if (effectChance >= 97) {
+
+            if (event.getEntity() instanceof Player player && event.getSource().getEntity() instanceof Entity) {
+
+                player.addEffect(new MobEffectInstance(ModEffects.HEAVY_BLEEDING_EFFECT.get(),
+                        2000, 0, false, false,true));
+                hasHBleeding = true;
+            }
+        } else if (effectChance >= 15 && effectChance <= 20) {
+
+            if (event.getEntity() instanceof Player player && event.getSource().getEntity() instanceof Entity) {
+
+                player.addEffect(new MobEffectInstance(ModEffects.BROKEN_ARM_EFFECT.get(),
+                        2000, 0, false, false,true));
+                hasBrokenArm = true;
+            }
+        }
+    }
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {}
