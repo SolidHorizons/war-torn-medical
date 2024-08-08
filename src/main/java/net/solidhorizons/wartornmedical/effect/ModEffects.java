@@ -16,11 +16,7 @@ public class ModEffects {
             DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, WarTornMedical.MOD_ID);
 
     public static final RegistryObject<MobEffect> BROKEN_LEG_EFFECT = MOB_EFFECTS.register("broken_leg",
-            () -> new BrokenLegEffect(MobEffectCategory.HARMFUL, 0x00000000)
-                    .addAttributeModifier(Attributes.MOVEMENT_SPEED,
-                    "eee3f4f6-d5b1-4dfe-833d-e82c413ac710",
-                    -0.25f,
-                    AttributeModifier.Operation.MULTIPLY_TOTAL));
+            () -> new BrokenLegEffect(MobEffectCategory.HARMFUL, 0x00000000));
 
     public static final RegistryObject<MobEffect> BROKEN_ARM_EFFECT = MOB_EFFECTS.register("broken_arm",
             () -> new BrokenArmEffect(MobEffectCategory.HARMFUL, 0x00000000));

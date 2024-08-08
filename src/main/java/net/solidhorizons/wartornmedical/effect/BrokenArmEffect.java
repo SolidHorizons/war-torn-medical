@@ -7,6 +7,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.Optional;
+
 public class BrokenArmEffect extends MobEffect {
     public BrokenArmEffect(MobEffectCategory category, int color) {
         super(category, color);
@@ -15,9 +17,14 @@ public class BrokenArmEffect extends MobEffect {
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
-            // Reduce player speed by 50%
-            player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 5000, 1, false, false, false));
-            player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 5000, 1, false, false, false));
+            if(!player.hasEffect(MobEffects.WEAKNESS) && !player.hasEffect(MobEffects.DIG_SLOWDOWN)) {
+
+                player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20, 0,
+                        false, false, false));
+
+                player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20, 0,
+                        false, false, false));
+            }
         }
     }
 
